@@ -13,11 +13,4 @@ RUN apt-get update \
     && apt-get install -y aspnetcore-runtime-2.1 \
     && rm -r /var/lib/apt/lists/*
 
-COPY /testMvc /var/testMvc
-WORKDIR /var/testMvc
-
-CMD [ "dotnet", "bin/Debug/netcoreapp2.1/testMvc.dll" ]
-
-VOLUME [ "/var" ]
-
 EXPOSE 5000 5001

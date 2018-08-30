@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Use this meta property to set the locale of the viewer. Viewer specific strings are then localized to the
+         chosen language. Languages available: english (default), german (locale=de), french (fr) -->
+    <meta name="gwt:property" content="locale=de">
+
+    <!--                                                               -->
+    <!-- Some styles used in this sample                               -->
+    <!--                                                               -->
+    <link rel="shortcut icon" href="Images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="Css/style.css">
+    <link rel="stylesheet" type="text/css" href="Css/viewer.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,700" media="all">
+    <script type="text/javascript">window.PDFTOOLS_WEBVIEWER_BASEURL = "./"</script>
+
+    <!-- Loading the viewer                                            -->
+    <script type="text/javascript" src="pdfwebviewer/PdfWebViewer.js"></script>
+    <!-- Sample specific JavaScript                                    -->
+    <script type="text/javascript" src="viewerSampleUI.js"></script>
+
+    <title>PDF Web Viewer - PDF Tools AG</title>
+
+</head>
+
+<body id="body">
+    <div class="wrapper">
+
+        <!-- header of the page -->
+        <header>
+            <div class="column logo">
+                <a href="http://www.pdf-tools.com" title="Home"><img src="Images/logo.png" width="221" height="72" alt="PDF-Tools" title="PDF Tools AG"></a>
+            </div>
+            <div class="column butterfly">
+                <img src="Images/butterfly.png" alt="PDF Tools Butterfly">
+            </div>
+            <div class="column">
+                <h1>PDF Web Viewer</h1>
+            </div>
+        </header>
+
+        <!-- contain the main content of the page -->
+        <main>
+            <!--                                                               -->
+            <!-- The viewer menu                                               -->
+            <!--                                                               -->
+            <div id="menu">
+                <div>
+                    <div id="menu_open" class="icon-folder-open"><input type="file" id="menu_file" accept=".pdf"></div>
+                    <div id="menu_save" class="icon-floppy"></div>
+                </div>
+                <div>
+                    <div id="menu_page_prev" class="icon-left-big"></div>
+                    <div id="menu_page" class="hide-xs"><span class="hide-m">page </span><input type="text" id="menu_pageno" size="3" onkeydown="if (event.keyCode == 13) { menu_pageno(); }" /></div>
+                    <div id="menu_page_next" class="icon-right-big"></div>
+                </div>
+                <div>
+                    <div id="menu_zoomout" class="icon-zoom-out"></div>
+                    <div id="menu_zoom" class="hide-xs"><span class="hide-m">zoom </span><input type="text" id="menu_zoomp" size="4" value="100%" onkeydown="if (event.keyCode == 13) { menu_zoomp(); }" /></div>
+                    <div id="menu_zoomin" class="icon-zoom-in"></div>
+                </div>
+                <div>
+                    <div id="menu_fit_page">f<span class="hide-s">it</span></div>
+                    <div id="menu_fit_width">w<span class="hide-s">idth</span></div>
+                    <div id="menu_fit_actual">a<span class="hide-s">ctual</span></div>
+                </div>
+                <div>
+                    <div id="menu_layout_singlepage" class="icon-doc"></div>
+                    <div id="menu_layout_onecolumn" class="icon-ellipsis-vert"></div>
+                </div>
+                <div class="hide-m">
+                    <div id="menu_rotate_left" class="icon-ccw"></div>
+                    <div id="menu_rotate_right" class="icon-cw"></div>
+                </div>
+                <div>
+                    <div id="menu_search" class="icon-search"></div>
+                </div>
+                <div class="hide-m">
+                    <div id="menu_close" class="icon-cancel"></div>
+                </div>				
+				<div>
+                    <div id="menu_busy" style="width: 35px"><img src="Images/busy.svg" id="busy" alt="loading..."/></div>
+                </div>
+            </div>
+
+            <!--                                                               -->
+            <!-- The viewer container                                          -->
+            <!--                                                               -->
+            <div id="viewerContainer">
+                <img src="Images/loading.svg" id="loading" alt="loading..." />
+                <div id="search-form-div">
+                    <form id="search-form" onsubmit="return false;">
+                        <div id="searchTextBusy" tabindex="-1"></div>
+                        <input id="searchText" class="white" type="text" name="search" placeholder="Search..." autocomplete="off" />
+                        <div id="separator">|</div>
+                        <div id="search_prev" class="icon-up-open searchButton"></div>
+                        <div id="search_next" class="icon-down-open searchButton"></div>
+                        <div id="search_config" class="icon-cog searchButton"></div>
+                        <div id="search_close" class="icon-cancel searchButton"></div>
+                        <input type="submit" style="position: absolute; left: -9999px" />
+                    </form>
+                </div>
+                <form id="search-config-form">
+                    <div>
+                        <input id="searchMatchCase" type="checkbox" name="match case" value="match case" />
+                        <label for="searchMatchCase">Case Sensitive</label>
+                    </div>
+                    <div>
+                        <input id="searchWrap" type="checkbox" name="wrap" value="wrap" checked="checked" />
+                        <label for="searchWrap">Wrap search</label>
+                    </div>
+                    <div>
+                        <input id="searchRegex" type="checkbox" name="regex" value="regex" />
+                        <label for="searchRegex">Regular Expression</label>
+                    </div>
+                </form>
+            </div>
+
+        </main>
+
+        <!-- footer of the page -->
+        <footer>
+            <section>
+                <div class="column">
+                    <address>
+                        <strong class="title">PDF Tools AG</strong><br>
+                        Kasernenstrasse 1<br>
+                        8184 Bachenbülach, Switzerland<br />
+                        <br />
+                        <sup>&copy; 2001-2017 PDF Tools AG</sup>
+                    </address>
+                </div>
+                <div class="column">
+                    <ul class="social-links list-inline">
+                        <li><a href="http://blog.pdf-tools.com" target="_blank" title="PDF-Tools Blog" class="icon_blog"></a></li>
+                        <li><a href="https://twitter.com/pdftoolscom" target="_blank" title="PDF Tools AG - Twitter" class="icon_twitter"></a></li>
+                        <li><a href="http://www.facebook.com/pages/PDF-Tools-AG/197370946974946?sk=wall" target="_blank" title="PDF Tools AG - Facebook" class="icon_facebook"></a></li>
+                        <li><a href="https://plus.google.com/+PdftoolsAG/posts" target="_blank" title="PDF Tools AG - google+" class="icon_google"></a></li>
+                    </ul>
+                </div>
+            </section>
+        </footer>
+    </div>
+
+</body>
+</html>

@@ -36,3 +36,11 @@ docker service ps myweb
 docker service scale myweb=10
 docker service update myweb
 ```
+
+### Docker Swarm Compose
+```
+docker stack deploy -c docker-compose.yml myweb
+docker stack services myweb
+docker stack services myweb
+docker stack ps myweb
+```

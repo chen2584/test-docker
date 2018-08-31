@@ -1,0 +1,25 @@
+version: '3'
+services:
+  web:
+    image: php:7-apache
+    ports:
+      - "80:80"
+    volumes:
+      - /Users/chen/myweb/html:/var/www/html
+    networks:
+      - my-network
+    deploy:
+      mode: replicated
+      replicas: 2
+  rethinkdb:
+    image: rethinkdb
+    ports:
+      - "8080:8080"
+    networks:
+      - my-network
+    deploy:
+      replicas: 1
+
+networks:
+  my-network:
+    external: true

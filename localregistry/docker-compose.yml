@@ -1,0 +1,35 @@
+version: "3.2"
+services:
+  registry:
+    image: registry:2
+    volumes:
+      - type: bind
+        source: ./mnt/registry
+        target: /var/lib/registry
+      - type: bind
+        source: ./auth
+        target: /auth
+    restart: always
+    environment:
+      - REGISTRY_AUTH=htpasswd
+      - REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm
+      - REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd
+    ports:
+      - "5002:5000"
+    networks:
+      - tools-network
+  fronend:
+    image: konradkleine/docker-registry-frontend:v2
+    environment:
+      - ENV_DOCKER_REGISTRY_HOST=registry
+      - ENV_DOCKER_REGISTRY_PORT=5000
+      - ENV_MODE_BROWSE_ONLY=yes
+      - ENV_DEFAULT_REPOSITORIES_PER_PAGE=50
+    ports:
+      - "8800:80"
+    restart: always
+    networks:
+      - tools-network    
+networks:
+  tools-network:
+    

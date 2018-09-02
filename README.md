@@ -35,8 +35,6 @@ docker service ls
 docker service ps myweb
 docker service scale myweb=10
 docker service update myweb
-<<<<<<< HEAD
-=======
 ```
 
 ### Docker Swarm Compose
@@ -45,5 +43,14 @@ docker stack deploy -c docker-compose.yml myweb
 docker stack services myweb
 docker stack services myweb
 docker stack ps myweb
->>>>>>> 02d01c1522019d66a28c2f7de5e52951e80b78e7
+```
+
+### Local Registry
+```
+#docker run -d -p 5000:5000 --restart=always --name registry registry:2
+# use docker-compose in localregistry instead
+docker run --entrypoint htpasswd registry:2 -Bbn admin 1234 > auth/htpasswd
+docker login http://localhost:5000
+docker tag docker-kf2 localhost:5000/docker-kf2
+docker push localhost:5000/docker-kf2
 ```

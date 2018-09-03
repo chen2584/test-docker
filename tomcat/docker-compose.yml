@@ -1,0 +1,8 @@
+version: "3.1"
+services:
+  tomcat-7:
+    image: tomcat:7.0.90-jre7
+    volumes:
+      - ./webapps:/usr/local/tomcat/webapps/
+    ports:
+      - 8080:8080
